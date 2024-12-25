@@ -6,20 +6,20 @@ describe('Cidade - UpdateById', () => {
   it('Atualizando uma cidade', async () => {
 
     const res1 = await testServer.post('/cidades').send({
-      nome: 'Itapevi'
+      nome: 'Balneário Camboriú'
     })
     expect(res1.status).toEqual(StatusCodes.CREATED)
 
-    const updateName = await testServer.put('/cidades/1').send({
-      nome: 'Barueri'
+    const updateName = await testServer.put(`/cidades/${res1.body}`).send({
+      nome: 'Londrina'
     })
     expect(updateName.status).toEqual(StatusCodes.NO_CONTENT)
 
-    const consultingName = await testServer.get('/cidades/1')
+    const consultingName = await testServer.get(`/cidades/${res1.body}`)
 
     expect(consultingName.body).toEqual({
-      "id": 1,
-      "nome": "Barueri"
+      "id": res1.body,
+      "nome": 'Londrina'
     })
     expect(consultingName.status).toEqual(StatusCodes.OK)
   })

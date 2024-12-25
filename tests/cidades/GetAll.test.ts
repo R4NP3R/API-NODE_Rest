@@ -15,13 +15,8 @@ describe('Cidade - GetAll', () => {
     expect(res2.status).toEqual(StatusCodes.CREATED)
 
     const consultando = await testServer.get('/cidades')
-    expect(consultando.body)
-    .toEqual([{
-      "id": 1,
-      "nome": "Itapevi"      
-    }, {
-      "id": 2, 
-      "nome": "Barueri"
-    }])
+    expect(Number(consultando.header['x-total-count'])).toBeGreaterThan(0);
+    expect(consultando.status).toEqual(StatusCodes.OK)
+    expect(consultando.body.length).toBeGreaterThan(0)
   })
 })

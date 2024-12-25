@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes'
 
 describe('Cidade - Create', () => {
 
-  it('Cria Regitro', async () => {
+  it('Cria Registro', async () => {
 
     const res1 = await testServer
     .post('/cidades')
