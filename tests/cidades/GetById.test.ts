@@ -4,10 +4,16 @@ import { testServer } from "../jest.setup"
 describe('Create - GetById', () => {
   it('Recebendo nome da cidade', async () => {
 
-      const res1 = await testServer.get('/cidades/1')
+    const res1 = await testServer.post('/cidades').send({
+      nome: 'Itapevi'
+    })
+    expect(res1.status).toEqual(StatusCodes.CREATED)
 
-
-      expect(res1.body).toBe('Em desenvolvimento')
-      expect(res1.status).toBe(StatusCodes.OK)
+      const getCity = await testServer.get('/cidades/1')
+      expect(getCity.body).toEqual({
+        "id": 1,
+        "nome": "Itapevi"
+      })
+      expect(getCity.status).toBe(StatusCodes.OK)
   })
 })

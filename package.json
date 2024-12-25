@@ -6,7 +6,11 @@
     "test": "jest",
     "dev": "tsx --watch ./src/index.ts",
     "postinstall": "tsc",
-    "production": "node ./build/index.js"
+    "production": "node ./build/index.js",
+    "knex:migrate": "knex --knexfile ./src/server/databases/knex/Environment.ts migrate:latest",
+    "knex:rollback": "knex --knexfile ./src/server/databases/knex/Environment.ts migrate:rollback",
+    "knex:rollback-all": "knex --knexfile ./src/server/databases/knex/Environment.ts migrate:rollback --all",
+    "knex:seed": "knex --knexfile ./src/server/databases/knex/Environment.ts seed:run"
   },
   "author": "Rafael Silva Santos",
   "license": "ISC",
@@ -15,6 +19,8 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jest": "^29.7.0",
+    "knex": "^3.1.0",
+    "sqlite3": "^5.1.7",
     "ts-jest": "^29.2.5",
     "yup": "^1.5.0"
   },
