@@ -1,10 +1,8 @@
 import type { Knex } from "knex";
 import { ETableNames } from "../ETableNames";
-import { table } from "console";
-
 
 export async function up(knex: Knex): Promise<void> {
-  knex.schema.createTable(ETableNames.cidade, table => {
+  return knex.schema.createTable(ETableNames.cidade, table => {
     table.bigIncrements('id').primary().index().unique(),
     table.string('nome', 150).checkLength('<=', 150).index(),
 
@@ -17,7 +15,7 @@ export async function up(knex: Knex): Promise<void> {
 
 
 export async function down(knex: Knex): Promise<void> {
-  knex.schema.dropTable(ETableNames.cidade)
+  return knex.schema.dropTable(ETableNames.cidade)
   .then(() => {
       console.log(`# Deleted Table ${ETableNames.cidade}`)
     }

@@ -4,7 +4,7 @@ import { ETableNames } from "../../ETableNames";
 
 export const create = async (cidades: Omit<ICidades, 'id'>): Promise<number | Error> => {
   try {    
-    const [result] = await Knex(ETableNames).insert(cidades).returning('id')
+    const [result] = await Knex(ETableNames.cidade).insert(cidades).returning('id')
 
     if (typeof result === 'object') {
       return result.id
@@ -15,6 +15,6 @@ export const create = async (cidades: Omit<ICidades, 'id'>): Promise<number | Er
     }    
   } catch (error) {
     console.log(error)
-    return new Error('Erro ao cadastrar o registro')
+    return new Error('Erro ao cadastrar o registro no Banco de Dados')
   }
 } 

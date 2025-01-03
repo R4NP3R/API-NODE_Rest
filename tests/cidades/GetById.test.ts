@@ -9,8 +9,8 @@ describe('Create - GetById', () => {
     })
     expect(res1.status).toEqual(StatusCodes.CREATED)
 
-      const getCity = await testServer.get(`/cidades/1`)
-      expect(getCity.body).toHaveProperty('nome')
-      expect(getCity.status).toBe(StatusCodes.OK)
+      const getCidade = await testServer.get(`/cidades/${res1.body}`)
+      expect(getCidade.body).toHaveProperty('nome')
+      expect(getCidade.status).toBe(StatusCodes.OK)
   })
 })
