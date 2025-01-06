@@ -22,7 +22,7 @@ describe('Usuario - SignIn', () => {
     })
 
     expect(res1.status).toBe(StatusCodes.OK)
-    expect(res1.body).toHaveProperty('acessToken')
+    expect(res1.body).toHaveProperty('accessToken')
   }) 
   it('Logando Usuario - Senha Errada', async () => {
     const res1 = await testServer

@@ -1,3 +1,4 @@
+import { PasswordCrypto } from "../../../shared/services"
 import { ETableNames } from "../../ETableNames"
 import { Knex } from "../../knex"
 import { IUsuario } from "../../models"
@@ -10,11 +11,12 @@ export const Create = async (usuario: Omit<IUsuario, 'id'>): Promise<number | Er
       return new Error(`Já existe um usuario cadastrado com o email: ${usuario.email}`)
     }
 
+    const hashedPassword = await PasswordCrypto.hashPassword(usuario.senha)
 
     const [result] = await Knex(ETableNames.usuario).insert({
       nome: usuario.nome,
       email: usuario.email,
-      senha: usuario.senha
+      senha: hashedPassword
     }).returning('id')
 
     
